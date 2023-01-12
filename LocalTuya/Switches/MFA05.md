@@ -10,8 +10,6 @@ Name: `[room/location]` (this is the entire device name)
 
 *Submit*
 
-----
-
 ## Creating Entities
 ### **??? Setting**
 Platform: `switch`  

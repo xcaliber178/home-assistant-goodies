@@ -10,8 +10,6 @@ Name: `[room/location]` (this is the entire device name)
 
 *Submit*
 
-----
-
 ## Creating Entities
 ### **Default State Behavior** - *This may not be functional*
 
