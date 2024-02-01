@@ -1,19 +1,15 @@
 substitutions:
-  name: "athom-smart-plug-v2"
-  friendly_name: "Smart Plug V2"
-  room: ""
-  device_description: "athom smart plug v2"
-  project_name: "Athom Technology.Smart Plug V2"
-  project_version: "2.0"
+  name: athom-smart-plug-v2
+  friendly_name: Smart Plug V2
   relay_restore_mode: RESTORE_DEFAULT_OFF
 
 esphome:
-  name: "${name}"
-  friendly_name: "${friendly_name}"
-  name_add_mac_suffix: true
+  name: $name
+  friendly_name: $friendly_name
+  name_add_mac_suffix: false
   project:
-    name: "${project_name}"
-    version: "${project_version}"
+    name: "Athom Smart Plug V2"
+    version: "2.1"
 
 esp8266:
   board: esp8285
@@ -33,10 +29,14 @@ mdns:
   disabled: false
 
 web_server:
-  port: 80
+  include_internal: true
 
 wifi:
-  ap: {} # This spawns an AP with the device name and mac address with no password.
+  fast_connect: True
+  ap:
+    ssid: $name
+    password: $name
+    ap_timeout: 5min
 
 captive_portal:
 
@@ -62,7 +62,7 @@ binary_sensor:
       number: 5
       mode: INPUT_PULLUP
       inverted: true
-    name: "Power Button"
+    name: "Button"
     disabled_by_default: true
     on_multi_click:
       - timing:
@@ -77,7 +77,7 @@ binary_sensor:
 
 sensor:
   - platform: uptime
-    name: "Uptime Sensor"
+    name: "Uptime"
 
   - platform: wifi_signal
     name: "WiFi Signal"
@@ -89,8 +89,6 @@ sensor:
       name: "Current"
       filters:
           - lambda: if (x < 0.060) return 0.0; else return x;   #For the chip will report less than 3w power when no load is connected
-
-
     voltage:
       name: "Voltage"
     power:
@@ -140,10 +138,6 @@ button:
   - platform: factory_reset
     name: "Restart with Factory Default Settings"
     id: Reset
-
-  - platform: safe_mode
-    name: "Safe Mode"
-    internal: false
 
   - platform: safe_mode
     name: "Safe Mode"
