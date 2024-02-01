@@ -8,7 +8,7 @@ esphome:
   friendly_name: $friendly_name
   name_add_mac_suffix: false
   project:
-    name: "Athom Smart Plug V2"
+    name: "Athom.Smart Plug V2"
     version: "2.1"
 
 esp8266:
